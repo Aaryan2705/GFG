@@ -22,7 +22,7 @@ class Solution {
             if (current_sum == s) {
                 result.push_back(start + 1);
                 result.push_back(end + 1);
-                return result;
+                break;
             }
         }
 
