@@ -10,18 +10,31 @@ using namespace std;
 class Solution {
   public:
     void segregate0and1(vector<int> &arr) {
-        int zeroIndex = 0; // Pointer for the next position of 0
-
-        // Iterate through the array
-        for (int i = 0; i < arr.size(); i++) {
-            // If the current element is 0, swap it with the element at zeroIndex
-            if (arr[i] == 0) {
-                swap(arr[i], arr[zeroIndex]);
-                zeroIndex++;
+        int zerokeeper = 0;
+        for(int i = 0; i < arr.size();i++){
+            if(arr[i]==0){
+                swap(arr[i],arr[zerokeeper]);
+                zerokeeper++;
             }
         }
+        
+        
     }
 };
+// public:
+//     void segregate0and1(vector<int> &arr) {
+//         int zeroIndex = 0; // Pointer for the next position of 0
+
+//         // Iterate through the array
+//         for (int i = 0; i < arr.size(); i++) {
+//             // If the current element is 0, swap it with the element at zeroIndex
+//             if (arr[i] == 0) {
+//                 swap(arr[i], arr[zeroIndex]);
+//                 zeroIndex++;
+//             }
+//         }
+//     }
+// };
 
 //{ Driver Code Starts.
 int main() {
