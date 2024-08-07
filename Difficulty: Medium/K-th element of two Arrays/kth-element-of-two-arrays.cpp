@@ -6,51 +6,36 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
   public:
+    // Function to find the k-th element in the merged sorted array
     int kthElement(int k, vector<int>& arr1, vector<int>& arr2) {
-        int n = arr1.size();
-        int m = arr2.size();
-        int i = 0, j = 0, count = 0;
-        int result = 0;
+        vector<int> merged; // To store the merged array
+        int i = 0, j = 0; // Indices for arr1 and arr2
 
-        // Traverse both arrays
-        while (i < n && j < m) {
+        // Merge the two arrays until one of them is exhausted
+        while (i < arr1.size() && j < arr2.size()) {
             if (arr1[i] < arr2[j]) {
-                result = arr1[i];
+                merged.push_back(arr1[i]);
                 i++;
             } else {
-                result = arr2[j];
+                merged.push_back(arr2[j]);
                 j++;
             }
-            count++;
-
-            // If we have reached the k-th element
-            if (count == k) {
-                return result;
-            }
         }
 
-        // If arr1 still has elements left
-        while (i < n) {
-            result = arr1[i];
+        // Add remaining elements of arr1 if any
+        while (i < arr1.size()) {
+            merged.push_back(arr1[i]);
             i++;
-            count++;
-            if (count == k) {
-                return result;
-            }
         }
 
-        // If arr2 still has elements left
-        while (j < m) {
-            result = arr2[j];
+        // Add remaining elements of arr2 if any
+        while (j < arr2.size()) {
+            merged.push_back(arr2[j]);
             j++;
-            count++;
-            if (count == k) {
-                return result;
-            }
         }
 
-        // This should never be reached if k is valid
-        return -1;
+        // Return the k-th element (1-indexed, so access k-1)
+        return merged[k - 1];
     }
 };
 
