@@ -14,16 +14,20 @@ class Solution {
         vector<int> merged;
 
         // Merge the two arrays
-        merged.reserve(2 * n);
+        // Insert elements of arr1 into the merged vector
         merged.insert(merged.end(), arr1.begin(), arr1.end());
+        
+        // Insert elements of arr2 into the merged vector
         merged.insert(merged.end(), arr2.begin(), arr2.end());
         
-        // Sort the merged array
+        // Sort the merged vector in non-decreasing order
         sort(merged.begin(), merged.end());
 
-        // Find the middle elements and sum them
+        // Access the first middle element (n-1)th element in the merged vector
         int middle1 = merged[n - 1];  // (n-1)th index
-        int middle2 = merged[n];      // nth index
+        
+        // Access the second middle element (n)th element in the merged vector
+        int middle2 = merged[n];    // nth index
         return middle1 + middle2;
     }
 };
