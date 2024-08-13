@@ -12,14 +12,12 @@ class Solution {
     int SumofMiddleElements(vector<int> &arr1, vector<int> &arr2) {
         int n = arr1.size();
         vector<int> merged;
-
-        // Merge the two arrays
-        // Insert elements of arr1 into the merged vector
-        merged.insert(merged.end(), arr1.begin(), arr1.end());
-        
-        // Insert elements of arr2 into the merged vector
-        merged.insert(merged.end(), arr2.begin(), arr2.end());
-        
+        for(auto it: arr1) {
+            merged.push_back(it);
+        }
+        for(auto it: arr2) {
+            merged.push_back(it);
+        }
         // Sort the merged vector in non-decreasing order
         sort(merged.begin(), merged.end());
 
