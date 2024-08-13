@@ -7,13 +7,26 @@ using namespace std;
 class Solution {
   public:
     int kthElement(int k, vector<int>& arr1, vector<int>& arr2) {
-        for(auto it: arr2)
-        {
-            arr1.push_back(it);
+        vector<int> merged;
+        int i = 0 , j = 0 ;
+        while(i< arr1.size() && j < arr2.size()){
+            if(arr1[i]<arr2[j]){
+                merged.push_back(arr1[i]);
+                i++;
+            }else {
+                merged.push_back(arr2[j]);
+                j++;
+            }
         }
-        sort(arr1.begin(),arr1.end());
-        
-        return arr1[k-1];
+        while(i<arr1.size()){
+            merged.push_back(arr1[i]);
+            i++;
+        }
+        while(j<arr2.size()){
+            merged.push_back(arr2[j]);
+            j++;
+        }
+        return merged[k-1];
     }
 };
 
