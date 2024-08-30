@@ -48,26 +48,26 @@ class Solution {
   public:
     // Function to find the length of a loop in the linked list.
     int countNodesinLoop(Node *head) {
-        bool istrue=false;
-        Node* curr=head;
-        Node* next=curr->next;
-        while(next!=NULL && next->next!=NULL){
-            curr=curr->next;
-            next=next->next->next;
-            if(curr==next){
-                istrue=true;
+        // Code here
+        int res=0;
+        Node* slow=head,*fast=head;
+        while(fast!=NULL&&fast->next!=NULL){
+            slow=slow->next;
+            fast=fast->next->next;
+            if(slow==fast){
+                res=1;
                 break;
             }
         }
-        if(istrue){
-            int ans=0;
-            do{
-                next=next->next;
-                ans++;
-            }while(curr!=next);
-            return ans;
+        // if loop is present 
+        if(res){
+            slow=slow->next;
+            while(slow!=fast){
+                slow=slow->next;
+                res++;
+            }
         }
-        return 0;
+        return res;
     }
 };
 
