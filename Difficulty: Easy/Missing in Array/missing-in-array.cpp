@@ -10,13 +10,12 @@ using namespace std;
 class Solution {
   public:
     int missingNumber(int n, vector<int>& arr) {
-        int total_sum = (n * (n + 1)) / 2;
-        int array_sum = 0;
-        for (int i = 0; i < n - 1; i++) {
-            array_sum += arr[i];
+        int totalSum = n * (n + 1) / 2;
+        int arrSum = 0;
+        for (int num : arr) {
+            arrSum += num;
         }
-        // The missing number is the difference between the total sum and the array sum
-        return total_sum - array_sum;
+        return totalSum - arrSum;
     }
 };
 
