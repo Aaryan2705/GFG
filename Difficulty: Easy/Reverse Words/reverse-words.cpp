@@ -7,25 +7,16 @@ using namespace std;
 
 class Solution {
   public:
-    // Function to reverse words in a given string.
     string reverseWords(string str) {
-        // code here
-        vector<string>v;
-        string s;
-        for(int i = 0; i<str.length(); i++){
-            if(str[i] == '.'){
-                v.push_back(s);
-                s.erase();
+        reverse(str.begin(), str.end());       // Reverse the entire string
+        int start = 0;
+        for (int i = 0; i <= str.size(); i++) {
+            if (i == str.size() || str[i] == '.') {
+                reverse(str.begin() + start, str.begin() + i); // Reverse individual words
+                start = i + 1;
             }
-            else s+=str[i];
         }
-        v.push_back(s);
-        s.erase();
-        for(int i = v.size()-1; i>=0; i--){
-            s += v[i];
-            if(i !=0 )s+='.';
-        }
-        return s;
+        return str;
     }
 };
 
