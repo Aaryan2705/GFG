@@ -10,12 +10,17 @@ using namespace std;
 class Solution {
   public:
     int missingNumber(int n, vector<int>& arr) {
+        // Calculate the sum of the first n natural numbers
         int totalSum = n * (n + 1) / 2;
-        int arrSum = 0;
-        for (int num : arr) {
-            arrSum += num;
+        
+        // Calculate the sum of the elements in the array
+        int arraySum = 0;
+        for (int i = 0; i < arr.size(); i++) {
+            arraySum += arr[i];
         }
-        return totalSum - arrSum;
+        
+        // The missing number is the difference between the total sum and array sum
+        return totalSum - arraySum;
     }
 };
 
