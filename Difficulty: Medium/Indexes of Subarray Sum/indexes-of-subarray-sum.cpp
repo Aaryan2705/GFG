@@ -6,58 +6,55 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
   public:
-    vector<int> subarraySum(vector<int> arr, int n, long long s) {
-        int start = 0;
-        long long current_sum = 0;
-        vector<int> result;
+    vector<int> subarraySum(vector<int> &arr, int target) {
+        int start = 0, currSum = 0;
 
-        for (int end = 0; end < n; end++) {
-            current_sum += arr[end];
+        for (int end = 0; end < arr.size(); end++) {
+            currSum += arr[end];
 
-            while (current_sum > s && start < end) {
-                current_sum -= arr[start];
+            while (currSum > target && start < end) {
+                currSum -= arr[start];
                 start++;
             }
 
-            if (current_sum == s) {
-                result.push_back(start + 1);
-                result.push_back(end + 1);
-                break;
+            if (currSum == target) {
+                return {start + 1, end + 1}; // 1-based indexing
             }
         }
 
-        if (result.empty()) {
-            return {-1};
-        }
-        
-        return result;
+        return {-1}; // No subarray found
     }
 };
-
 
 //{ Driver Code Starts.
 
 int main() {
     int t;
     cin >> t;
+    cin.ignore();
     while (t--) {
-        int n;
-        long long s;
-        cin >> n >> s;
-        vector<int> arr(n);
-        // int arr[n];
-        const int mx = 1e9;
-        for (int i = 0; i < n; i++) {
-            cin >> arr[i];
-        }
-        Solution ob;
-        vector<int> res;
-        res = ob.subarraySum(arr, n, s);
+        vector<int> arr;
+        int d;
+        string input;
 
-        for (int i = 0; i < res.size(); i++)
-            cout << res[i] << " ";
-        cout << endl;
+        getline(cin, input);
+        stringstream ss(input);
+        int number;
+        while (ss >> number) {
+            arr.push_back(number);
+        }
+
+        cin >> d;
+        cin.ignore();
+
+        Solution ob;
+        vector<int> result = ob.subarraySum(arr, d);
+        for (int i : result) {
+            cout << i << " ";
+        }
+        cout << "\n~\n";
     }
     return 0;
 }
+
 // } Driver Code Ends
