@@ -1,99 +1,33 @@
-//{ Driver Code Starts
-#include <bits/stdc++.h>
-using namespace std;
-
-
-// } Driver Code Ends
-//User function template for C++
-class Solution{
-public:	
-	bool sameFreq(string s)
-{
-    map<char, int> mp1;
-        map<int, int> mp2;
-    
-        for(int i=0;i<s.length();i++)
-        {
-            mp1[s[i]]++;
+class Solution {
+  public:
+    bool sameFreq(string& s) {
+        vector<int> freq(26,0);
+        for(auto& c:s){
+            freq[c-'a']++;
         }
-    
-        if(mp1.size() == 1)
-        {
-            return true;
-        }
-        
-        if(mp1.size() == 2)
-        {
-            int max = INT_MIN;
-            for(auto itr : mp1)
-            {
-                if(itr.second>max)
-                {
-                    max = itr.second;
-                }
+        int c1=-1, cnt1=0, c2=-1, cnt2=0;
+        for(int i=0;i<26;i++){
+            if(freq[i]==0) continue;
+            else if(freq[i]==c1) cnt1++;
+            else if(freq[i]==c2) cnt2++;
+            else if(c1==-1) {
+                c1=freq[i];
+                cnt1++;
             }
-            
-            for(auto itr : mp1)
-            {
-                if(itr.second != max)
-                {
-                    if((max-1) == itr.second)
-                    {
-                        return true;
-                    }
-                }
+            else if(c2==-1) {
+                c2=freq[i];
+                cnt2++;
             }
+            else return false;
         }
- 
-        for(auto itr : mp1)
-        {
-            mp2[itr.second]++;
+        if(c2==-1) return true;
+        if(c1<c2){
+            if(c1==1 && cnt1==1) return true;
+            if(c2-c1==1 && cnt2==1) return true;
+        } else {
+            if(c2==1 && cnt2==1) return true;
+            if(c1-c2==1 && cnt1==1) return true;
         }
-        
-        if(mp2.size() == 1)
-        {
-            return true;
-        }
-        
-        int mini = INT_MAX;
-        int tmp = 0;
-        for(auto itr : mp2)
-        {
-            if(itr.second<mini)
-            {
-                tmp = itr.first;
-                mini = itr.second;
-            }
-        }
-        int prik = 0;
-        for(auto itr : mp2)
-        {
-            if(itr.first != tmp && mp2.size()<=2)
-            {
-                if(((tmp - 1) == itr.first && mp2[tmp]==1) || (tmp-1) == 0 && mp2[tmp]<=1)
-                {
-                    return true;
-                }
-            }
-        }
- 
         return false;
-}
-};
-
-//{ Driver Code Starts.
-int main(){
-    int t;
-    cin>>t;
-    while(t--)
-    {
-        string s;
-        cin>>s;
-        Solution ob;
-        cout<<ob.sameFreq(s)<<endl;
     }
-}
-
-
-
-// } Driver Code Ends
+};
